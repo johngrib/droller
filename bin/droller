@@ -6,10 +6,10 @@ HEAD="$DIRECTORY/head"
 
 main() {
     createFiles
-    echo $# args
+
     case $1 in
         "status"|"s")
-            echo "status";;
+            checkStatus; exit ;;
         "open"|"o")
             echo "open";;
         "+1"|"1")
@@ -43,6 +43,10 @@ createFiles() {
     if [ ! -f "$HEAD" ]; then
         touch $HEAD
     fi
+}
+
+checkStatus() {
+    head -1 $HEAD | cut -c 42-
 }
 
 main $@
