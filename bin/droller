@@ -17,7 +17,9 @@ main() {
             checkStatus
             ;;
         "-1"|"-")
-            echo "one minus";;
+            plusOnePoint -1
+            checkStatus
+            ;;
         "top"|"t")
             echo "select top";;
         "random"|"r"|"")
