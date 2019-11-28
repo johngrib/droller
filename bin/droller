@@ -23,13 +23,13 @@ main() {
         "edit"|"e")
             echo "edit HEAD";;
         "add"|"a")
-            echo "add uri";;
+            addRecord $2;;
         "delete"|"d")
             echo "delete";;
         "help"|"h")
             echo "help";;
         *)
-            echo "else";;
+            addRecord $1;;
     esac
 }
 
@@ -47,6 +47,44 @@ createFiles() {
 
 checkStatus() {
     head -1 $HEAD | cut -c 42-
+}
+
+addRecord() {
+    uri="$1"
+    hash=`getHash $uri`
+
+    if [ `isExistHash $hash` == "1" ]; then
+        echo "The record already exists."
+        selectRecord $hash
+        return 0;
+    fi
+    saveRecord $hash $uri
+    echo "A record has been added."
+    selectRecord $hash
+    checkStatus
+}
+
+getHash() {
+    openssl sha1 <<< $1
+}
+
+isExistHash() {
+    hash="$1"; grep $hash $INDEX | wc -l | tr -d ' '
+}
+
+selectRecord() {
+    hash="$1"; grep $hash $INDEX | head -1 > $HEAD
+}
+
+saveRecord() {
+    hash="$1"; uri="$2"; point="0"
+    title=`getTitleFromUri $uri`
+    printf "%s %s %s %s\n" $hash $point "[$title]" $uri >> $INDEX
+}
+
+getTitleFromUri() {
+    uri="$1"
+    curl -s $uri | egrep -o '<title>[^<]*?</title>' | sed -E 's,</?title>,,g'
 }
 
 main $@
