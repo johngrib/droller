@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
 
-DIRECTORY="$HOME/.droller"
+DIRECTORY="$HOME/.config/droller"
 INDEX="$DIRECTORY/index"
 
 if [ ! -d "$DIRECTORY" ]; then
-    mkdir -p ~/.droller
+    mkdir -p $DIRECTORY
 fi
 if [ ! -f "$INDEX" ]; then
     touch $INDEX
