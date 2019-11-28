@@ -23,7 +23,7 @@ main() {
             checkStatus
             ;;
         "edit"|"e")
-            echo "edit HEAD";;
+            $EDITOR $INDEX;;
         "add"|"a")
             addRecord $2;;
         "delete"|"d")
