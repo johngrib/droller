@@ -7,6 +7,30 @@ HEAD="$DIRECTORY/head"
 main() {
     createFiles
     echo $# args
+    case $1 in
+        "status"|"s")
+            echo "status";;
+        "open"|"o")
+            echo "open";;
+        "+1"|"1")
+            echo "one plus";;
+        "-1"|"-")
+            echo "one minus";;
+        "top"|"t")
+            echo "select top";;
+        "random"|"r")
+            echo "random";;
+        "edit"|"e")
+            echo "edit HEAD";;
+        "add"|"a")
+            echo "add uri";;
+        "delete"|"d")
+            echo "delete";;
+        "help"|"h")
+            echo "help";;
+        *)
+            echo "else";;
+    esac
 }
 
 createFiles() {
