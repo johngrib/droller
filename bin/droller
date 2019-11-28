@@ -20,8 +20,9 @@ main() {
             plusOnePoint -1
             checkStatus
             ;;
-        "top"|"t")
-            echo "select top";;
+        "rank"|"ranking")
+            ranking
+            ;;
         "random"|"r"|"")
             selectRandomRecord
             checkStatus
@@ -61,6 +62,10 @@ checkStatus() {
 
 openSelectedRecord() {
     head -1 $HEAD | sed -E "s/^.*] http/http/" | xargs open
+}
+
+ranking() {
+    sort -k2 -n -r $INDEX | cut -c 42-
 }
 
 addRecord() {
