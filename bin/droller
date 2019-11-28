@@ -18,8 +18,10 @@ main() {
             echo "one minus";;
         "top"|"t")
             echo "select top";;
-        "random"|"r")
-            echo "random";;
+        "random"|"r"|"")
+            selectRandomRecord
+            checkStatus
+            ;;
         "edit"|"e")
             echo "edit HEAD";;
         "add"|"a")
@@ -62,6 +64,10 @@ addRecord() {
     echo "A record has been added."
     selectRecord $hash
     checkStatus
+}
+
+selectRandomRecord() {
+    sort -R $INDEX | head -1  > $HEAD
 }
 
 getHash() {
