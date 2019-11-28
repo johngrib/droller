@@ -11,7 +11,7 @@ main() {
         "status"|"s")
             checkStatus; exit ;;
         "open"|"o")
-            echo "open";;
+            openSelectedRecord;;
         "+1"|"1")
             echo "one plus";;
         "-1"|"-")
@@ -49,6 +49,10 @@ createFiles() {
 
 checkStatus() {
     head -1 $HEAD | cut -c 42-
+}
+
+openSelectedRecord() {
+    head -1 $HEAD | sed -E "s/^.*] http/http/" | xargs open
 }
 
 addRecord() {
