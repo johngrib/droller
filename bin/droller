@@ -27,7 +27,11 @@ main() {
         "add"|"a")
             addRecord $2;;
         "delete"|"d")
-            echo "delete";;
+            checkStatus
+            deleteSelectedRecord
+            selectRandomRecord
+            checkStatus
+            ;;
         "help"|"h")
             echo "help";;
         *)
@@ -68,6 +72,13 @@ addRecord() {
     echo "A record has been added."
     selectRecord $hash
     checkStatus
+}
+
+deleteSelectedRecord() {
+    hash=`head -1 $HEAD | cut -d ' ' -f1`
+    grep -v $hash $INDEX > $INDEX.old
+    cat $INDEX.old > $INDEX
+    echo "The record has been deleted."
 }
 
 selectRandomRecord() {
