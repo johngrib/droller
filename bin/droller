@@ -40,6 +40,9 @@ createFiles() {
     if [ ! -f "$INDEX" ]; then
         touch $INDEX
     fi
+    if [ ! -f "$HEAD" ]; then
+        touch $HEAD
+    fi
 }
 
 main $@
