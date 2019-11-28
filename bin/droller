@@ -13,7 +13,9 @@ main() {
         "open"|"o")
             openSelectedRecord;;
         "+1"|"1")
-            echo "one plus";;
+            plusOnePoint +1
+            checkStatus
+            ;;
         "-1"|"-")
             echo "one minus";;
         "top"|"t")
@@ -83,6 +85,14 @@ deleteSelectedRecord() {
 
 selectRandomRecord() {
     sort -R $INDEX | head -1  > $HEAD
+}
+
+plusOnePoint() {
+    hash=`head -1 $HEAD | cut -d' ' -f1`
+    point=`head -1 $HEAD | cut -d' ' -f2`
+    newPoint=$(($point $1))
+    sed -i '' "s/$hash $point /$hash $newPoint /" $HEAD
+    sed -i '' -E "s/$hash -?[0-9]{1,} /$hash $newPoint /" $INDEX
 }
 
 getHash() {
