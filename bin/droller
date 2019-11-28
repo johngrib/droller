@@ -2,13 +2,21 @@
 
 DIRECTORY="$HOME/.config/droller"
 INDEX="$DIRECTORY/index"
+HEAD="$DIRECTORY/head"
 
-if [ ! -d "$DIRECTORY" ]; then
-    mkdir -p $DIRECTORY
-fi
-if [ ! -f "$INDEX" ]; then
-    touch $INDEX
-fi
+main() {
+    createFiles
+    echo $# args
+}
 
-exit
+createFiles() {
+    if [ ! -d "$DIRECTORY" ]; then
+        mkdir -p $DIRECTORY
+    fi
+    if [ ! -f "$INDEX" ]; then
+        touch $INDEX
+    fi
+}
+
+main $@
 
