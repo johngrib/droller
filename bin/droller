@@ -134,7 +134,7 @@ saveRecord() {
 
 getTitleFromUri() {
     uri="$1"
-    curl -s $uri | egrep -o '<title>[^<]*?</title>' | sed -E 's,</?title>,,g'
+    curl -s $uri | egrep -o '<title[^>]*?>[^<]*?</title>' | sed -E 's,</?title[^>]*>,,g;'
 }
 
 showHelp() {
