@@ -1,8 +1,11 @@
 # droller
 
-[한국어 설명]( README-ko.md )
+[English]( README.md )
 
 쌓아 두기만 하고 영원히 읽지 않았을 uri들 중 하나를 랜덤으로 추천해주는 command-line 도구.
+
+* 페이스북, 트위터에 자꾸 올라오는 좋아 보이는 웹 페이지 링크를 droller로 관리하세요.
+* droller는 랜덤으로 글 하나를 추천해줍니다.
 
 ## Install
 
