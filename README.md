@@ -17,6 +17,23 @@ brew install droller
 brew remove droller
 ```
 
+## Options
+
+| option    | description                          | example           |
+|-----------|--------------------------------------|-------------------|
+| <uri>     | Add a record to index file.          | droller http://.. |
+| random,   | Select randomly.                     | droller           |
+| open, o   | Open the selected record.            | droller o         |
+| +1, 1     | +1 to the selected record.           | droller 1         |
+| -1, -     | -1 to the selected record.           | droller -         |
+| delete, d | Delete a record from the index file. | droller d         |
+| status, s | Show the selected record.            | droller s         |
+| ranking   | Show the ranking table.              | droller ranking   |
+| backup, b | Back up your index file using git.   | droller b         |
+| log, l    | Show backup logs.                    | droller l         |
+| edit, e   | Edit the index file.                 | droller e         |
+| help, h   | Help.                                | droller h         |
+
 ## How to use
 
 If someone posts a link that looks good on Twitter or Facebook, copy it. Then type the following command in the terminal.

@@ -5,17 +5,17 @@ INDEX="$DIRECTORY/index"
 HEAD="$DIRECTORY/head"
 
 ## usage: droller [s | o | 1 | -1 | ranking | edit | | <uri> | d | h]
-## [status | s] # Show the selected record      # Example: droller s
+## [<uri>]      # Add a record to index file    # Example: droller http://www...
+## [random | ]  # Select randomly               # Example: droller
 ## [open | o]   # Open the selected record      # Example: droller o
 ## [+1 | 1]     # +1 to the selected record     # Example: droller 1
 ## [-1 | -]     # -1 to the selected record     # Example: droller -1
-## [ranking]    # Show the ranking table        # Example: droller ranking
-## [random | ]  # Show the ranking table        # Example: droller
-## [edit | e]   # Edit the index file           # Example: droller edit
-## [<uri>]      # Add a record to the index file       # Example: droller http://www...
 ## [delete | d] # Delete a record from the index file  # Example: droller d
-## [backup | b] # Back up your index file.      # Example: droller backup
-## [log | l]    # Show backup logs.             # Example: droller l
+## [status | s] # Show the selected record      # Example: droller s
+## [ranking]    # Show the ranking table        # Example: droller ranking
+## [backup | b] # Back up your index file       # Example: droller backup
+## [log | l]    # Show backup logs              # Example: droller l
+## [edit | e]   # Edit the index file           # Example: droller edit
 ## [help | h]   # Help                          # Example: droller h
 
 main() {
