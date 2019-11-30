@@ -14,10 +14,23 @@ brew tap johngrib/homebrew-johngrib
 brew install droller
 ```
 
+`.bashrc`나 `.bash_profile`에 다음 설정을 추가해두면 편합니다.
+
+```sh
+# 터미널에서 `option d`를 누르면 `command c`로 복사한 링크가 자동으로 등록
+bind '"\ed": "droller \"`pbpaste`\"\c-m"'
+```
+
 ## Uninstall
 
 ```
 brew remove droller
+```
+
+## Upgrade to latest version
+
+```
+brew upgrade droller
 ```
 
 ## Options

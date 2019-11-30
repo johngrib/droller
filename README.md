@@ -11,10 +11,23 @@ brew tap johngrib/homebrew-johngrib
 brew install droller
 ```
 
+Add the following configuration to `.bashrc` or` .bash_profile`.
+
+```sh
+# Pressing `option d` or `esc d` in the terminal adds a link on the clipboard.
+bind '"\ed": "droller \"`pbpaste`\"\c-m"'
+```
+
 ## Uninstall
 
 ```
 brew remove droller
+```
+
+## Upgrade to latest version
+
+```
+brew upgrade droller
 ```
 
 ## Options
