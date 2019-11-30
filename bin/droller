@@ -154,9 +154,18 @@ backup() {
         printf "Backup requires git. Please install git.\nBackup has been canceled.\n"
         return 1
     fi
+    if [ `isNeedBackup` == "0" ]; then
+        echo "There are no changes. You do not need to back up."
+        gitLog
+        return 0
+    fi
     gitInit
     gitCommit
-    gitLog | head
+    gitLog
+}
+
+isNeedBackup() {
+    git -C $DIRECTORY status --short | grep -v '??' | wc -l | tr -d ' '
 }
 
 gitInit() {
