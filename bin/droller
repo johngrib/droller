@@ -89,7 +89,6 @@ ranking() {
 addRecord() {
     uri="$1"
     hash=`getHash $uri`
-    echo hash
 
     if [ `isExistHash $hash` == "1" ]; then
         echo "The record already exists."
