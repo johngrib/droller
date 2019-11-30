@@ -14,7 +14,9 @@ HEAD="$DIRECTORY/head"
 ## [edit | e]   # Edit the index file           # Example: droller edit
 ## [<uri>]      # Add a record to the index file       # Example: droller http://www...
 ## [delete | d] # Delete a record from the index file  # Example: droller d
-## [help | h]   # Help                                 # Example: droller h
+## [backup | b] # Back up your index file.      # Example: droller backup
+## [log | l]    # Show backup logs.             # Example: droller l
+## [help | h]   # Help                          # Example: droller h
 
 main() {
     createFiles
@@ -49,6 +51,10 @@ main() {
             selectRandomRecord
             checkStatus
             ;;
+        "backup"|"b")
+            backup;;
+        "log"|"l")
+            gitLog;;
         "help"|"h")
             showHelp;;
         *)
@@ -140,6 +146,45 @@ getTitleFromUri() {
 showHelp() {
     egrep '#{2} usage:' $BASH_SOURCE | sed 's/##//'
     egrep '## \[' $BASH_SOURCE | column -ts'#'
+}
+
+backup() {
+    git --version 2> /dev/null
+    if [ "$?" -ne "0" ]; then
+        printf "Backup requires git. Please install git.\nBackup has been canceled.\n"
+        return 1
+    fi
+    if [ `isNeedBackup` == "0" ]; then
+        echo "There are no changes. You do not need to back up."
+        gitLog
+        return 0
+    fi
+    gitInit
+    gitCommit
+    gitLog
+}
+
+isNeedBackup() {
+    git -C $DIRECTORY status --short | grep -v '??' | wc -l | tr -d ' '
+}
+
+gitInit() {
+    if [ ! -d "$DIRECTORY/.git" ]; then
+        mkdir -p $DIRECTORY
+        git init $DIRECTORY
+    fi
+}
+
+gitCommit() {
+    linkCount=`wc -l $INDEX | sed 's/^ *\([0-9]*\).*/\1/'`
+    totalPoint=`awk '{ total+= $2 } END { print total }' $INDEX`
+    git -C $DIRECTORY add $INDEX
+    git -C $DIRECTORY commit --allow-empty \
+        -m "`printf "links: %s / total point: %s" $linkCount $totalPoint`"
+}
+
+gitLog() {
+    git -C $DIRECTORY log --color --graph --pretty=format:'%Cred%h%Creset - %s %Cgreen(%ci)' --abbrev-commit
 }
 
 main $@
